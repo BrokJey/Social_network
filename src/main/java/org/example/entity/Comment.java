@@ -30,4 +30,9 @@ public class Comment {
     private Post post;
 
     private LocalDateTime createdAt;
+
+    @PrePersist
+    public void prePersist() {
+        createdAt = LocalDateTime.now();
+    }
 }

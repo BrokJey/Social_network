@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.example.entity.enums.Gender;
+import java.time.LocalDateTime;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -55,4 +56,11 @@ public class User {
 
     @ManyToMany(mappedBy = "members")
     private Set<Community> communities = new HashSet<>();
+
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
 }

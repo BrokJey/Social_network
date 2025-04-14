@@ -22,6 +22,9 @@ public class Community {
     private Long id;
 
     @NotBlank
+    @Column(length = 20)
+    private String name;
+
     @Column(length = 500)
     private String description;
 
@@ -40,4 +43,9 @@ public class Community {
     private List<Post> posts = new ArrayList<>();
 
     private LocalDateTime createdAt;
+
+    @PrePersist
+    public void prePersist() {
+        createdAt = LocalDateTime.now();
+    }
 }

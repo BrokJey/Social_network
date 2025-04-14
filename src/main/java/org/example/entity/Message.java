@@ -25,5 +25,14 @@ public class Message {
     @JoinColumn(name = "chat_id")
     private Chat chat;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sender_id")
+    private User sender;
+
     private LocalDateTime sentAt;
+
+    @PrePersist
+    public void prePersist() {
+        sentAt = LocalDateTime.now();
+    }
 }
