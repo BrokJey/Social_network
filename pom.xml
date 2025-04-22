@@ -20,7 +20,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.4.4</version>
-        <relativePath/> <!-- Добавлено для исправления ошибки -->
+        <relativePath/>
     </parent>
 
     <dependencies>
@@ -42,7 +42,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>${hibernate.version}</version> <!-- Явное указание версии -->
+            <version>${hibernate.version}</version>
         </dependency>
 
         <!-- Database -->
