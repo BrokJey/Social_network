@@ -10,16 +10,16 @@
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="username" type="VARCHAR(255)">
+            <column name="username" type="VARCHAR(20)">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="password" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="first_name" type="VARCHAR(255)">
+            <column name="first_name" type="VARCHAR(20)">
                 <constraints nullable="false"/>
             </column>
-            <column name="last_name" type="VARCHAR(255)">
+            <column name="last_name" type="VARCHAR(20)">
                 <constraints nullable="false"/>
             </column>
             <column name="age" type="INTEGER"/>
@@ -53,7 +53,186 @@
         <addForeignKeyConstraint baseTableName="user_roles" baseColumnNames="user_id"
                                  referencedTableName="users" referencedColumnNames="id"
                                  constraintName="fk_user_roles_user"/>
-        <addForeignKeyConstraint baseTableName="" baseColumnNames="" constraintName="" referencedTableName=""
-                                 referencedColumnNames=""
+        <addForeignKeyConstraint baseTableName="user_roles" baseColumnNames="role_id"
+                                 referencedTableName="roles" referencedColumnNames="id"
+                                 constraintName="fk_user_roles_role"/>
+    </changeSet>
+
+    <!--COMMUNITIES-->
+    <changeSet id="10" author="you">
+        <createTable tableName="communities">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(500)"/>
+            <column name="admin_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="communities" baseColumnNames="admin_id"
+                                 constraintName="fk_communities_admin" referencedTableName="users"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <!--POSTS-->
+    <changeSet id="4" author="you">
+        <createTable tableName="posts">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="content" type="VARCHAR(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="community_id" type="BIGINT"/>
+            <column name="created_at" type="TIMESTAMP"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="posts" baseColumnNames="author_id"
+                                 constraintName="fk_posts_author" referencedTableName="users"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="posts" baseColumnNames="community_id"
+                                 constraintName="fk_posts_community" referencedTableName="communities"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <!--COMMENTS-->
+    <changeSet id="5" author="you">
+        <createTable tableName="comments">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="content" type="VARCHAR(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="post_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="comments" baseColumnNames="author_id"
+                                 constraintName="fk_comments_author" referencedTableName="users"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="comments" baseColumnNames="post_id"
+                                 constraintName="fk_comments_post" referencedTableName="posts"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <!--MESSAGES-->
+    <changeSet id="6" author="you">
+        <createTable tableName="messages">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="content" type="VARCHAR(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="chat_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sender_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sent_at" type="TIMESTAMP"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="messages" baseColumnNames="chat_id"
+                                 constraintName="fk_messages_chat" referencedTableName="chats"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="messages" baseColumnNames="sender_id"
+                                 constraintName="fk_messages_sender" referencedTableName="users"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <!--CHATS-->
+    <changeSet id="7" author="you">
+        <createTable tableName="chats">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="type" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--CHAT_PARTICIPANTS-->
+    <changeSet id="8" author="you">
+        <createTable tableName="chat_participants">
+            <column name="chat_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="chat_participants"
+                       columnNames="chat_id, user_id"
+                       constraintName="pk_chat_participants"/>
+        <addForeignKeyConstraint baseTableName="chat_participants" baseColumnNames="chat_id"
+                                 constraintName="fk_chat_participants_chat" referencedTableName="chats"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="chat_participants" baseColumnNames="user_id"
+                                 constraintName="fk_chat_participants_user" referencedTableName="users"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <!--FRIENDSHIPS-->
+    <changeSet id="9" author="you">
+        <createTable tableName="friendships">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="requester_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="receiver_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="friendships" baseColumnNames="requester_id"
+                                 constraintName="fk_friendships_requester" referencedTableName="users"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="friendships" baseColumnNames="receiver_id"
+                                 constraintName="fk_friendships_receiver" referencedTableName="users"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <!--COMMUNITY_MEMBERS-->
+    <changeSet id="11" author="you">
+        <createTable tableName="community_members">
+            <column name="community_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <addPrimaryKey tableName="community_members"
+                       columnNames="community_id, user_id"
+                       constraintName="pk_community_members"/>
+        <addForeignKeyConstraint baseTableName="community_members" baseColumnNames="community_id"
+                                 constraintName="fk_community_members_community" referencedTableName="communities"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="community_members" baseColumnNames="user_id"
+                                 constraintName="fk_community_members_user" referencedTableName="users"
+                                 referencedColumnNames="id"/>
     </changeSet>
 </databaseChangeLog>
