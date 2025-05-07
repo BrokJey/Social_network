@@ -15,11 +15,11 @@ public interface ChatMapper {
     @Mapping(target = "participantIds", source = "participants", qualifiedByName = "mapUsersToIds")
     ChatDTO toDTO(Chat chat);
 
-    @Mapping(target = "participants", source = "participantsIds", qualifiedByName = "mapIdsToUsers")
+    @Mapping(target = "participants", source = "participantIds", qualifiedByName = "mapIdsToUsers")
     Chat fromDTO(ChatDTO dto);
 
     @Named("mapUsersToIds")
-    default Set<Long> mapIsersToIds(Set<User> users) {
+    default Set<Long> mapUsersToIds(Set<User> users) {
         if (users == null) return null;
         return users.stream()
                 .map(User::getId)
