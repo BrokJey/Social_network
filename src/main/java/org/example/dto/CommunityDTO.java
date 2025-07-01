@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 public class CommunityDTO {
     private Long id;
     private String name;
+    private String description;
     private Long adminId;
     private LocalDateTime createdAt;
 }

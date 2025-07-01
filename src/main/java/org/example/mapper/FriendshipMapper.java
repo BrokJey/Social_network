@@ -8,7 +8,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
 @Mapper(componentModel = "spring")
-public interface FriendshipsMapper {
+public interface FriendshipMapper {
     @Mapping(target = "requesterId", source = "requester.id")
     @Mapping(target = "receiverId", source = "receiver.id")
     FriendshipDTO toDTO(Friendship friendship);
