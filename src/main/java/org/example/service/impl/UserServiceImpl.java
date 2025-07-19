@@ -69,14 +69,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<UserDTO> getUserById(Long id) {
+    public UserDTO getUserById(Long id) {
         User user = entityManager.find(User.class, id);
         if(user != null) {
             log.info("Info: пользователь найден с id {}", user.getId());
-            return Optional.of(userMapper.toDTO(user));
+            return userMapper.toDTO(user);
         } else {
             log.error("Error: Пользователь не найден с id {}", id);
-            return Optional.empty();
+            throw new IllegalArgumentException("Пользователь не найден");
         }
     }
 

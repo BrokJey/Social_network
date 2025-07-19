@@ -8,6 +8,6 @@ import java.util.Optional;
 public interface UserService {
     UserDTO registerUser(UserDTO userDTO);
     UserDTO updateUser(Long id, UserDTO updatedDTO);
-    Optional<UserDTO> getUserById(Long id);
+    UserDTO getUserById(Long id);
     List<UserDTO> searchUsers(String firstName, String lastName, Integer age, String gender);
 }
