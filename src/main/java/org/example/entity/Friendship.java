@@ -7,7 +7,7 @@ import org.example.entity.enums.FriendshipStatus;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "friendships")
+@Table(name = "Friendships")
 @Getter
 @Setter
 @NoArgsConstructor

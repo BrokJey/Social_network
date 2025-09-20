@@ -29,10 +29,10 @@ public class PostServiceImpl implements PostService {
     private final PostMapper postMapper;
 
     @Override
-    public PostDTO createPost(Long userId, PostDTO postDTO) {
+    public PostDTO createPostUser(Long userId, PostDTO postDTO) {
         if (postDTO.getContent() == null) {
             log.error("Error: содержимое поста не может быть пустым");
-            throw new IllegalArgumentException("Содержимое поста не может быть пустым");
+            throw new IllegalArgumentException("Error: Содержимое поста не может быть пустым");
         }
 
         User user = entityManager.find(User.class, userId);
@@ -45,6 +45,26 @@ public class PostServiceImpl implements PostService {
         post.setCreatedAt(LocalDateTime.now());
         entityManager.persist(post);
         log.info("Info: создан пост с id {} для пользователя {}", post.getId(), userId);
+        return postMapper.toDTO(post);
+    }
+
+    @Override
+    public PostDTO createPostCommunity(Long communityId, PostDTO postDTO) {
+        if (postDTO.getContent() == null) {
+            log.error("Error: содержимое поста не может быть пустым");
+            throw new IllegalArgumentException("Error: Содержимое поста не может быть пустым");
+        }
+
+        Community community = entityManager.find(Community.class, communityId);
+        if (community == null) {
+            log.error("Error: сообщество с id {} не найдено", communityId);
+        }
+
+        Post post = postMapper.fromDTO(postDTO);
+        post.setCommunity(community);
+        post.setCreatedAt(LocalDateTime.now());
+        entityManager.persist(post);
+        log.info("Info: создан пост с id {} для сообщества {}", post.getId(), communityId);
         return postMapper.toDTO(post);
     }
 

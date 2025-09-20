@@ -5,7 +5,7 @@ import lombok.*;
 import org.example.entity.enums.RoleType;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "Roles")
 @Getter
 @Setter
 @NoArgsConstructor

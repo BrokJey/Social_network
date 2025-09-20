@@ -1,6 +1,7 @@
 package org.example.service.impl;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -31,12 +31,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO registerUser(UserDTO userDTO) {
         if (userDTO.getFirstName() == null) {
-            log.error("Ошибка: имя пользователя не может быть null");
-            throw new IllegalArgumentException("Имя роли не может быть null");
+            log.error("Error: имя пользователя не может быть null");
+            throw new IllegalArgumentException("Error: имя пользователя не может быть null");
         }
         User user = userMapper.fromDTO(userDTO);
-        entityManager.persist(user);
         user.setCreatedAt(LocalDateTime.now());
+        entityManager.persist(user);
         log.info("Info: пользователь зарегистрирован с id {}: {}", user.getId(), user.getFirstName());
         return userMapper.toDTO(user);
     }
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
     public UserDTO updateUser(Long id, UserDTO updatedDTO) {
         User user = entityManager.find(User.class, id);
         if (user == null) {
-            log.error("Error: пользователь не найден с id {}", user.getId());
+            log.error("Error: пользователь не найден с id {}", id);
             throw new IllegalArgumentException("Пользователь не найден с id: " + id);
         }
 
@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
             return userMapper.toDTO(user);
         } else {
             log.error("Error: Пользователь не найден с id {}", id);
-            throw new IllegalArgumentException("Пользователь не найден");
+            throw new EntityNotFoundException("Пользователь не найден");
         }
     }
 

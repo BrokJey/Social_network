@@ -21,7 +21,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class MessageServiseImpl implements MessageService {
+public class MessageServiceImpl implements MessageService {
 
     @PersistenceContext
     private final EntityManager entityManager;
@@ -32,7 +32,7 @@ public class MessageServiseImpl implements MessageService {
     public MessageDTO sendMessage(Long chatId, Long senderId, MessageDTO messageDTO) {
         if (messageDTO.getContent() == null || messageDTO.getContent().trim().isEmpty()) {
             log.error("Error: содержимое сообщения не может быть пустым");
-            throw new IllegalArgumentException("Содержимое сообщение не может быть пустым");
+            throw new IllegalArgumentException("Error: содержимое сообщение не может быть пустым");
         }
 
         Chat chat = entityManager.find(Chat.class, chatId);

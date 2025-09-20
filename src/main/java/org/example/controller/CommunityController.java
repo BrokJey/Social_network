@@ -46,7 +46,7 @@ public class CommunityController {
     }
 
     //Посмотреть все сообщества
-    @GetMapping("/show")
+    @GetMapping("/all")
     public ResponseEntity<List<CommunityDTO>> getAllCommunities() {
         List<CommunityDTO> communityes = communityService.getAllCommunities();
         return ResponseEntity.ok(communityes);

@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PostService {
-    PostDTO createPost(Long userId, PostDTO postDTO);
+    PostDTO createPostUser(Long userId, PostDTO postDTO);
+    PostDTO createPostCommunity(Long communityId, PostDTO postDTO);
     Optional<PostDTO> getPostById(Long postId);
     List<PostDTO> getPostsByUserId(Long userId);
     List<PostDTO> getPostsByCommunityId(Long communityId);

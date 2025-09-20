@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 public class CommunityServiceImpl implements CommunityService {
 
     @PersistenceContext
-    private final EntityManager entityManager;
+    private EntityManager entityManager;
 
     private final CommunityMapper communityMapper;
     private final UserMapper userMapper;
@@ -63,7 +63,7 @@ public class CommunityServiceImpl implements CommunityService {
             throw new IllegalArgumentException("Сообщество не найдено");
         }
 
-        if (community.getAdmin().getId() != adminId) {
+        if (!community.getAdmin().getId().equals(adminId)) {
             log.error("Error: пользователь с id = {} не является администратором сообщества {}", adminId, communityId);
             throw new IllegalArgumentException("Только администратор может удалить сообщество");
         }
@@ -89,7 +89,6 @@ public class CommunityServiceImpl implements CommunityService {
 
         community.getMembers().add(user);
         entityManager.merge(community);
-
         log.info("Info: пользователь {} присоединился к сообществу {}", userId, communityId);
     }
 
@@ -109,14 +108,14 @@ public class CommunityServiceImpl implements CommunityService {
         }
 
         community.getMembers().remove(user);
-        entityManager.merge(community);
 
+        entityManager.merge(community);
         log.info("info: пользователь {} покинул сообщество {}", userId, communityId);
     }
 
     @Override
     public List<CommunityDTO> getAllCommunities() {
-        List<Community> communities = entityManager.createQuery("SELECT c FROM Communities c", Community.class).getResultList();
+        List<Community> communities = entityManager.createQuery("SELECT c FROM Community c", Community.class).getResultList();
 
         List<CommunityDTO> result = communities.stream()
                 .map(communityMapper::toDTO)
@@ -183,6 +182,11 @@ public class CommunityServiceImpl implements CommunityService {
         post.setContent(content);
         post.setCreatedAt(LocalDateTime.now());
 
+        community.getPosts().add(post);
+
+        entityManager.persist(post);
+        entityManager.merge(community);
+
         log.info("Info: новый пост {} добавлен в сообщество {}", post.getId(), communityId);
     }
 
@@ -195,7 +199,7 @@ public class CommunityServiceImpl implements CommunityService {
             throw new IllegalArgumentException("Сообщество не найдено");
         }
 
-        if(community.getAdmin().getId() != adminId) {
+        if(!community.getAdmin().getId().equals(adminId)) {
             log.error("Error: пользователь {} не является администратором сообщества {}", adminId, communityId);
             throw new IllegalArgumentException("Пользователь не является администратором");
         }

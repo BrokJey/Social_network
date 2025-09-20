@@ -56,5 +56,4 @@ public class FriendshipController {
         List<FriendshipDTO> pending = friendshipService.getPendingRequests(id);
         return ResponseEntity.ok(pending);
     }
-
 }

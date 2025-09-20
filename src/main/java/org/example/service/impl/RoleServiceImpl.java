@@ -91,7 +91,7 @@ public class RoleServiceImpl implements RoleService {
         Role role = entityManager.find(Role.class, roleId);
 
         if (user == null || role == null) {
-            log.error("Error: пользователь {} или роль {} пусты", user.getId(), role.getId());
+            log.error("Error: пользователь {} или роль {} пусты", user != null ? user.getId() : null, role != null ? role.getId() : null);
             return Optional.empty();
         }
 
@@ -108,7 +108,7 @@ public class RoleServiceImpl implements RoleService {
         Role role = entityManager.find(Role.class, roleId);
 
         if (user == null || role == null) {
-            log.error("Error: пользователь {} или роль {} пусты", user.getId(), role.getId());
+            log.error("Error: пользователь {} или роль {} пусты", user != null ? user.getId() : null, role != null ? role.getId() : null);
             return Optional.empty();
         }
 

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.dto.PostDTO;
 import org.example.service.PostService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,16 +16,23 @@ public class PostController {
 
     private final PostService postService;
 
-    //Создание поста
-    @PostMapping
-    public ResponseEntity<PostDTO> createPost(@RequestParam Long userId, @RequestBody PostDTO postDTO) {
-        PostDTO created = postService.createPost(userId, postDTO);
+    //Создание поста пользователем
+    @PostMapping("/user/{userId}")
+    public ResponseEntity<PostDTO> createPostUser(@PathVariable Long userId, @RequestBody PostDTO postDTO) {
+        PostDTO created = postService.createPostUser(userId, postDTO);
+        return ResponseEntity.ok(created);
+    }
+
+    //Создание поста сообществом
+    @PostMapping("/community/{communityId}")
+    public ResponseEntity<PostDTO> createPostCommunity(@PathVariable Long communityId, @RequestBody PostDTO postDTO) {
+        PostDTO created = postService.createPostCommunity(communityId, postDTO);
         return ResponseEntity.ok(created);
     }
 
     //Поиск поста по id
     @GetMapping("/{id}")
-    public  ResponseEntity<PostDTO> getPostsById(@PathVariable Long id) {
+    public  ResponseEntity<PostDTO> getPostById(@PathVariable Long id) {
         return postService.getPostById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
