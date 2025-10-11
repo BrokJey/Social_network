@@ -30,6 +30,7 @@ public class ChatServiceImpl implements ChatService {
     @Override
     public ChatDTO createChat(Long userId1, Long userId2) {
         if (Objects.equals(userId1, userId2)) {
+            log.error("Нельзя создать чат с самим собой");
             throw new IllegalArgumentException("Нельзя создать чат с самим собой");
         }
 
@@ -73,6 +74,7 @@ public class ChatServiceImpl implements ChatService {
     @Override
     public ChatDTO createGroupChat(Set<Long> participantsIds) {
         if (participantsIds == null || participantsIds.size() < 2) {
+            log.error("Для группового чата нужно минимум 2 участника");
             throw new IllegalArgumentException("Для группового чата нужно минимум 2 участника");
         }
 
@@ -114,6 +116,7 @@ public class ChatServiceImpl implements ChatService {
     public void deleteChat(Long chatId, Long requesterId) {
         Chat chat = entityManager.find(Chat.class, chatId);
         if (chat == null) {
+            log.error("Чат не найден");
             throw new IllegalArgumentException("Чат не найден");
         }
 
