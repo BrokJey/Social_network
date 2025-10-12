@@ -3,12 +3,15 @@ package org.example.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.dto.PostDTO;
 import org.example.service.PostService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,23 +20,30 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(PostController.class)
+@ExtendWith(MockitoExtension.class)
 public class PostControllerTest {
 
-    @Autowired
     private MockMvc mockMvc;
 
-    @MockitoBean
+    @Mock
     private PostService postService;
 
+    @InjectMocks
+    private PostController postController;
+
     private final ObjectMapper objectMapper = new ObjectMapper();
+
+    @BeforeEach
+    void setUp() {
+        mockMvc = MockMvcBuilders.standaloneSetup(postController).build();
+    }
 
     @Test
     void createPostUser_success() throws Exception {
         PostDTO input = PostDTO.builder().content("Пост!").build();
         PostDTO output = PostDTO.builder().id(1L).content("Пост!").build();
 
-        when(postService.createPostUser(1L, any(PostDTO.class))).thenReturn(output);
+        when(postService.createPostUser(eq(1L), any(PostDTO.class))).thenReturn(output);
 
         mockMvc.perform(post("/posts/user/1")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -42,7 +52,7 @@ public class PostControllerTest {
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.content").value("Пост!"));
 
-        verify(postService, times(1)).createPostUser(1L, any(PostDTO.class));
+        verify(postService, times(1)).createPostUser(eq(1L), any(PostDTO.class));
     }
 
     @Test
@@ -50,7 +60,7 @@ public class PostControllerTest {
         PostDTO input = PostDTO.builder().content("Пост!").build();
         PostDTO output = PostDTO.builder().id(1L).content("Пост!").build();
 
-        when(postService.createPostCommunity(1L, any(PostDTO.class))).thenReturn(output);
+        when(postService.createPostCommunity(eq(1L), any(PostDTO.class))).thenReturn(output);
 
         mockMvc.perform(post("/posts/community/1")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -59,7 +69,7 @@ public class PostControllerTest {
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.content").value("Пост!"));
 
-        verify(postService, times(1)).createPostCommunity(1L, any(PostDTO.class));
+        verify(postService, times(1)).createPostCommunity(eq(1L), any(PostDTO.class));
 
     }
 

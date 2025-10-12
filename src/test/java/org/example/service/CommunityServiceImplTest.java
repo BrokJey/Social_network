@@ -34,12 +34,22 @@ public class CommunityServiceImplTest {
     @Mock
     private UserMapper userMapper;
 
-    @InjectMocks
     private CommunityServiceImpl communityService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        // Создаем сервис с мапперами (EntityManager не в конструкторе)
+        communityService = new CommunityServiceImpl(communityMapper, userMapper);
+        
+        // Устанавливаем EntityManager через рефлексию
+        try {
+            java.lang.reflect.Field field = CommunityServiceImpl.class.getDeclaredField("entityManager");
+            field.setAccessible(true);
+            field.set(communityService, entityManager);
+        } catch (Exception e) {
+            throw new RuntimeException("Не удалось установить EntityManager", e);
+        }
     }
 
     @Test
@@ -149,7 +159,9 @@ public class CommunityServiceImplTest {
 
         List<Community> communities = List.of(community1, community2);
 
-        when(entityManager.createQuery("SELECT c FROM Community c", Community.class).getResultList()).thenReturn(communities);
+        TypedQuery<Community> query = mock(TypedQuery.class);
+        when(entityManager.createQuery("SELECT c FROM Community c", Community.class)).thenReturn(query);
+        when(query.getResultList()).thenReturn(communities);
         when(communityMapper.toDTO(community1)).thenReturn(CommunityDTO.builder().id(1L).name("Сообщество1").build());
         when(communityMapper.toDTO(community2)).thenReturn(CommunityDTO.builder().id(2L).name("Сообщество2").build());
 
@@ -180,7 +192,7 @@ public class CommunityServiceImplTest {
 
         TypedQuery<Community> query = mock(TypedQuery.class);
         when(entityManager.createQuery("SELECT c FROM Community c JOIN c.members m WHERE m.id = :userId", Community.class)).thenReturn(query);
-        when(query.setParameter("userId", 1L)).thenReturn(query);
+        when(query.setParameter(eq("userId"), eq(1L))).thenReturn(query);
         when(query.getResultList()).thenReturn(communities);
         when(communityMapper.toDTO(community1)).thenReturn(CommunityDTO.builder().id(1L).name("Сообщество1").build());
         when(communityMapper.toDTO(community2)).thenReturn(CommunityDTO.builder().id(2L).name("Сообщество2").build());

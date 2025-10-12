@@ -27,12 +27,13 @@ public class UserServiceImplTest {
     @Mock
     private UserMapper userMapper;
 
-    @InjectMocks
     private UserServiceImpl userService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        // Создаем сервис с EntityManager и маппером
+        userService = new UserServiceImpl(entityManager, userMapper);
     }
 
     @Test
@@ -163,6 +164,6 @@ public class UserServiceImplTest {
         assertEquals(2L, results.get(1).getId());
         assertEquals(2, results.size());
         verify(entityManager).createQuery(startsWith("SELECT u FROM User u WHERE 1=1"), eq(User.class));
-        verify(mockedQuery).setParameter(1, "Иван");
+        verify(mockedQuery).setParameter(eq(1), eq("Иван"));
     }
 }

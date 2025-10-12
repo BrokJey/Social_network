@@ -5,12 +5,15 @@ import org.example.dto.RoleDTO;
 import org.example.dto.UserDTO;
 import org.example.entity.enums.RoleType;
 import org.example.service.RoleService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,16 +22,23 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(RoleController.class)
+@ExtendWith(MockitoExtension.class)
 public class RoleControllerTest {
 
-    @Autowired
     private MockMvc mockMvc;
 
-    @MockitoBean
+    @Mock
     private RoleService roleService;
 
+    @InjectMocks
+    private RoleController roleController;
+
     private final ObjectMapper objectMapper = new ObjectMapper();
+
+    @BeforeEach
+    void setUp() {
+        mockMvc = MockMvcBuilders.standaloneSetup(roleController).build();
+    }
 
     @Test
     void createRole_success() throws Exception {
@@ -42,7 +52,7 @@ public class RoleControllerTest {
                 .content(objectMapper.writeValueAsString(input)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.name").value(RoleType.ROLE_USER));
+                .andExpect(jsonPath("$.name").value("ROLE_USER"));
     }
 
     @Test
@@ -53,7 +63,7 @@ public class RoleControllerTest {
         mockMvc.perform(get("/roles/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.name").value(RoleType.ROLE_USER));
+                .andExpect(jsonPath("$.name").value("ROLE_USER"));
     }
 
     @Test
@@ -73,7 +83,7 @@ public class RoleControllerTest {
         mockMvc.perform(get("/roles/search").param("name", "ROLE_USER"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.name").value(RoleType.ROLE_USER));
+                .andExpect(jsonPath("$.name").value("ROLE_USER"));
     }
 
     @Test

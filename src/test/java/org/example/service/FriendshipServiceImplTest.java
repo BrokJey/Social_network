@@ -32,12 +32,13 @@ public class FriendshipServiceImplTest {
     @Mock
     private UserMapper userMapper;
 
-    @InjectMocks
     private FriendshipServiceImpl friendshipService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        // Создаем сервис с EntityManager и мапперами
+        friendshipService = new FriendshipServiceImpl(entityManager, friendshipMapper, userMapper);
     }
 
     @Test

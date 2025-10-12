@@ -28,12 +28,13 @@ public class RoleServiceImplTest {
     @Mock
     private RoleMapper roleMapper;
 
-    @InjectMocks
     private RoleServiceImpl roleService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        // Создаем сервис с EntityManager и маппером
+        roleService = new RoleServiceImpl(entityManager, roleMapper);
     }
 
     @Test
@@ -101,7 +102,7 @@ public class RoleServiceImplTest {
         TypedQuery<Role> mockQuery = mock(TypedQuery.class);
 
         when(entityManager.createQuery("SELECT r FROM Role r WHERE r.name = :name", Role.class)).thenReturn(mockQuery);
-        when(mockQuery.setParameter(eq("name"), "ROLE_USER")).thenReturn(mockQuery);
+        when(mockQuery.setParameter(eq("name"), eq("ROLE_USER"))).thenReturn(mockQuery);
         when(mockQuery.getResultList()).thenReturn(List.of(role));
         when(roleMapper.toDTO(role)).thenReturn(dto);
 
@@ -109,7 +110,7 @@ public class RoleServiceImplTest {
 
         assertEquals(dto.getName(), result.getName());
         verify(entityManager).createQuery("SELECT r FROM Role r WHERE r.name = :name", Role.class);
-        verify(mockQuery).setParameter("name", "ROLE_USER");
+        verify(mockQuery).setParameter(eq("name"), eq("ROLE_USER"));
         verify(mockQuery).getResultList();
         verify(roleMapper).toDTO(role);
 

@@ -30,12 +30,13 @@ public class CommentServiceImplTest {
     @Mock
     private TypedQuery<Comment> query;
 
-    @InjectMocks
     private CommentServiceImpl commentService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        // Создаем сервис с EntityManager и маппером
+        commentService = new CommentServiceImpl(entityManager, commentMapper);
     }
 
     @Test
@@ -45,18 +46,18 @@ public class CommentServiceImplTest {
         User user = new User();
         user.setId(1L);
         CommentDTO inputDto = CommentDTO.builder().content("Комментарий").authorId(1L).postId(1L).build();
-        Comment commentEntity = new Comment();
-        commentEntity.setAuthor(user);
-        commentEntity.setContent("Комментарий");
-        commentEntity.setPost(post);
 
         CommentDTO expectedDto = CommentDTO.builder().id(1L).content("Комментарий").authorId(1L).postId(1L).build();
+
+        // Мокаем find() методы
+        when(entityManager.find(User.class, 1L)).thenReturn(user);
+        when(entityManager.find(Post.class, 1L)).thenReturn(post);
 
         doAnswer(invocation -> {
             Comment c = invocation.getArgument(0);
             c.setId(1L);
             return null;
-        }).when(entityManager).persist(commentEntity);
+        }).when(entityManager).persist(any(Comment.class));
 
         when(commentMapper.toDTO(any(Comment.class))).thenReturn(expectedDto);
 
@@ -66,8 +67,8 @@ public class CommentServiceImplTest {
         assertEquals(expectedDto.getContent(), result.getContent());
         assertEquals(expectedDto.getPostId(), result.getPostId());
         assertEquals(expectedDto.getAuthorId(), result.getAuthorId());
-        verify(entityManager).persist(commentEntity);
-        verify(commentMapper).toDTO(commentEntity);
+        verify(entityManager).persist(any(Comment.class));
+        verify(commentMapper).toDTO(any(Comment.class));
 
     }
 

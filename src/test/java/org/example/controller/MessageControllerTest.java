@@ -3,12 +3,15 @@ package org.example.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.dto.MessageDTO;
 import org.example.service.MessageService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,23 +20,30 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(MessageController.class)
+@ExtendWith(MockitoExtension.class)
 public class MessageControllerTest {
 
-    @Autowired
     private MockMvc mockMvc;
 
-    @MockitoBean
+    @Mock
     private MessageService messageService;
 
+    @InjectMocks
+    private MessageController messageController;
+
     private final ObjectMapper objectMapper = new ObjectMapper();
+
+    @BeforeEach
+    void setUp() {
+        mockMvc = MockMvcBuilders.standaloneSetup(messageController).build();
+    }
 
     @Test
     void sendMessage() throws Exception {
         MessageDTO input = MessageDTO.builder().content("Сообщение!").build();
         MessageDTO output = MessageDTO.builder().id(1L).content("Сообщение!").build();
 
-        when(messageService.sendMessage(1L, 1L, any(MessageDTO.class))).thenReturn(output);
+        when(messageService.sendMessage(eq(1L), eq(1L), any(MessageDTO.class))).thenReturn(output);
 
         mockMvc.perform(post("/messages/send/1/1")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -42,7 +52,7 @@ public class MessageControllerTest {
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.content").value("Сообщение!"));
 
-        verify(messageService, times(1)).sendMessage(1L, 1L, any(MessageDTO.class));
+        verify(messageService, times(1)).sendMessage(eq(1L), eq(1L), any(MessageDTO.class));
     }
 
     @Test

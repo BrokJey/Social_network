@@ -30,12 +30,13 @@ public class PostServiceImplTest {
     @Mock
     private PostMapper postMapper;
 
-    @InjectMocks
     private PostServiceImpl postService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        // Создаем сервис с EntityManager и маппером
+        postService = new PostServiceImpl(entityManager, postMapper);
     }
 
     @Test
@@ -76,7 +77,7 @@ public class PostServiceImplTest {
         savedPost.setContent("Новый пост!");
 
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> postService.createPostUser(1L, inputDTO));
-        assertEquals("Error: содержимое поста не может быть пустым", ex.getMessage());
+        assertEquals("Error: Содержимое поста не может быть пустым", ex.getMessage());
         verifyNoInteractions(entityManager, postMapper);
     }
 
@@ -118,7 +119,7 @@ public class PostServiceImplTest {
         savedPost.setContent("Новый пост!");
 
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> postService.createPostCommunity(1L, inputDTO));
-        assertEquals("Error: содержимое поста не может быть пустым", ex.getMessage());
+        assertEquals("Error: Содержимое поста не может быть пустым", ex.getMessage());
         verifyNoInteractions(entityManager, postMapper);
     }
 
@@ -151,6 +152,11 @@ public class PostServiceImplTest {
         post2.setContent("Второй пост!");
 
         List<Post> posts = List.of(post1, post2);
+
+        // Мокаем find() для проверки существования пользователя
+        User user = new User();
+        user.setId(1L);
+        when(entityManager.find(User.class, 1L)).thenReturn(user);
 
         TypedQuery<Post> queryMock = mock(TypedQuery.class);
         when(entityManager.createQuery(anyString(), eq(Post.class))).thenReturn(queryMock);
@@ -185,6 +191,11 @@ public class PostServiceImplTest {
         post2.setContent("Второй пост!");
 
         List<Post> posts = List.of(post1, post2);
+
+        // Мокаем find() для проверки существования сообщества
+        Community community = new Community();
+        community.setId(1L);
+        when(entityManager.find(Community.class, 1L)).thenReturn(community);
 
         TypedQuery<Post> queryMock = mock(TypedQuery.class);
         when(entityManager.createQuery(anyString(), eq(Post.class))).thenReturn(queryMock);

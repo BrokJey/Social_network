@@ -12,6 +12,10 @@ import org.example.entity.enums.RoleType;
 @AllArgsConstructor
 @Builder
 public class Role {
+    
+    public Role(RoleType name) {
+        this.name = name;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

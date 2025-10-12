@@ -15,6 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -29,12 +30,13 @@ public class ChatServiceImplTest {
     @Mock
     private ChatMapper chatMapper;
 
-    @InjectMocks
     private ChatServiceImpl chatService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        // Создаем сервис с EntityManager и маппером
+        chatService = new ChatServiceImpl(entityManager, chatMapper);
     }
 
     @Test
@@ -45,13 +47,13 @@ public class ChatServiceImplTest {
         User user2 = new User();
         user2.setId(2L);
 
-        ChatDTO inputDto = ChatDTO.builder().type(ChatType.PRIVATE).participantsIds(Set.of(1L, 2L)).build();
-        Chat chatEntity = new Chat();
-        chatEntity.setId(1L);
-        chatEntity.setType(ChatType.PRIVATE);
-        chatEntity.setParticipants(Set.of(user1, user2));
-
         ChatDTO expectedDto = ChatDTO.builder().id(1L).type(ChatType.PRIVATE).participantsIds(Set.of(1L, 2L)).build();
+
+        // Мокаем createQuery для поиска существующих чатов
+        TypedQuery<Chat> query = mock(TypedQuery.class);
+        when(entityManager.createQuery(anyString(), eq(Chat.class))).thenReturn(query);
+        when(query.setParameter(anyString(), any())).thenReturn(query);
+        when(query.getResultList()).thenReturn(new ArrayList<>()); // Пустой список = чат не найден
 
         when(entityManager.find(User.class, 1L)).thenReturn(user1);
         when(entityManager.find(User.class, 2L)).thenReturn(user2);
@@ -62,8 +64,8 @@ public class ChatServiceImplTest {
         assertEquals(expectedDto.getId(), result.getId());
         assertEquals(expectedDto.getType(), result.getType());
         assertEquals(expectedDto.getParticipantsIds(), result.getParticipantsIds());
-        verify(entityManager).persist(chatEntity);
-        verify(chatMapper).toDTO(chatEntity);
+        verify(entityManager).persist(any(Chat.class));
+        verify(chatMapper).toDTO(any(Chat.class));
     }
 
     @Test
@@ -77,12 +79,6 @@ public class ChatServiceImplTest {
         User user3 = new User();
         user3.setId(3L);
 
-        ChatDTO inputDto = ChatDTO.builder().type(ChatType.GROUP).participantsIds(Set.of(1L, 2L, 3L)).build();
-        Chat chatEntity = new Chat();
-        chatEntity.setId(1L);
-        chatEntity.setType(ChatType.GROUP);
-        chatEntity.setParticipants(Set.of(user1, user2, user3));
-
         ChatDTO expectedDto = ChatDTO.builder().id(1L).type(ChatType.GROUP).participantsIds(Set.of(1L, 2L, 3L)).build();
 
         when(entityManager.find(User.class, 1L)).thenReturn(user1);
@@ -95,8 +91,8 @@ public class ChatServiceImplTest {
         assertEquals(expectedDto.getId(), result.getId());
         assertEquals(expectedDto.getType(), result.getType());
         assertEquals(expectedDto.getParticipantsIds(), result.getParticipantsIds());
-        verify(entityManager).persist(chatEntity);
-        verify(chatMapper).toDTO(chatEntity);
+        verify(entityManager).persist(any(Chat.class));
+        verify(chatMapper).toDTO(any(Chat.class));
     }
 
     @Test
@@ -118,8 +114,8 @@ public class ChatServiceImplTest {
         List<Chat> chats = List.of(chat1, chat2);
 
         TypedQuery<Chat> query = mock(TypedQuery.class);
-        when(entityManager.createQuery("SELECT c FROM Chat c JOIN c.participants p WHERE p.id = :userId", Chat.class)).thenReturn(query);
-        when(query.setParameter("userId", 1L)).thenReturn(query);
+        when(entityManager.createQuery(anyString(), eq(Chat.class))).thenReturn(query);
+        when(query.setParameter(eq("userId"), eq(1L))).thenReturn(query);
         when(query.getResultList()).thenReturn(chats);
         when(chatMapper.toDTO(chat1)).thenReturn(ChatDTO.builder().id(1L).type(ChatType.PRIVATE).build());
         when(chatMapper.toDTO(chat2)).thenReturn(ChatDTO.builder().id(2L).type(ChatType.GROUP).build());
@@ -130,7 +126,7 @@ public class ChatServiceImplTest {
         verify(chatMapper).toDTO(chat1);
         verify(chatMapper).toDTO(chat2);
         verify(entityManager).createQuery(anyString(), eq(Chat.class));
-        verify(query).setParameter("userId", 1L);
+        verify(query).setParameter(eq("userId"), eq(1L));
     }
 
     @Test

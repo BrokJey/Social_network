@@ -27,12 +27,13 @@ public class MessageServiceImplTest {
     @Mock
     private MessageMapper messageMapper;
 
-    @InjectMocks
     private MessageServiceImpl messageService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        // Создаем сервис с EntityManager и маппером
+        messageService = new MessageServiceImpl(entityManager, messageMapper);
     }
 
     @Test
@@ -80,7 +81,7 @@ public class MessageServiceImplTest {
         messageEntity.setId(1L);
 
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> messageService.sendMessage(1L, 1L, inputDto));
-        assertEquals("Error: содержимое сообщения не может быть пустым", ex.getMessage());
+        assertEquals("Error: содержимое сообщение не может быть пустым", ex.getMessage());
         verifyNoInteractions(entityManager, messageMapper);
     }
 
@@ -118,12 +119,12 @@ public class MessageServiceImplTest {
         TypedQuery<Message> messagesQuery = mock(TypedQuery.class);
 
         when(entityManager.createQuery(startsWith("SELECT c FROM Chat"), eq(Chat.class))).thenReturn(chatQuery);
-        when(chatQuery.setParameter("userId1", 1L)).thenReturn(chatQuery);
-        when(chatQuery.setParameter("userId2", 2L)).thenReturn(chatQuery);
+        when(chatQuery.setParameter(eq("userId1"), eq(1L))).thenReturn(chatQuery);
+        when(chatQuery.setParameter(eq("userId2"), eq(2L))).thenReturn(chatQuery);
         when(chatQuery.getResultList()).thenReturn(List.of(chat));
 
         when(entityManager.createQuery(startsWith("SELECT m FROM Message"), eq(Message.class))).thenReturn(messagesQuery);
-        when(messagesQuery.setParameter("chatId", 1L)).thenReturn(messagesQuery);
+        when(messagesQuery.setParameter(eq("chatId"), eq(1L))).thenReturn(messagesQuery);
         when(messagesQuery.getResultList()).thenReturn(List.of(message1, message2));
 
         when(messageMapper.toDTO(message1)).thenReturn(MessageDTO.builder().id(1L).content("Первое сообщение").build());
@@ -151,12 +152,12 @@ public class MessageServiceImplTest {
 
         var chatIdsQuery = mock(TypedQuery.class);
         when(entityManager.createQuery(startsWith("SELECT c.id"), eq(Long.class))).thenReturn(chatIdsQuery);
-        when(chatIdsQuery.setParameter("userId", 1L)).thenReturn(chatIdsQuery);
+        when(chatIdsQuery.setParameter(eq("userId"), eq(1L))).thenReturn(chatIdsQuery);
         when(chatIdsQuery.getResultList()).thenReturn(chatIds);
 
         var messagesQuery = mock(TypedQuery.class);
         when(entityManager.createQuery(startsWith("SELECT m FROM Message"), eq(Message.class))).thenReturn(messagesQuery);
-        when(messagesQuery.setParameter("chatIds", chatIds)).thenReturn(messagesQuery);
+        when(messagesQuery.setParameter(eq("chatIds"), eq(chatIds))).thenReturn(messagesQuery);
         when(messagesQuery.getResultList()).thenReturn(List.of(message1, message2));
 
         when(messageMapper.toDTO(message1)).thenReturn(MessageDTO.builder().id(1L).content("Первое сообщение").build());
