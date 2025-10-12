@@ -51,8 +51,11 @@ public class User {
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Friendship> friendships = new ArrayList();
+    @OneToMany(mappedBy = "requester", cascade = CascadeType.ALL)
+    private List<Friendship> sentFriendships = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
+    private List<Friendship> receivedFriendships = new ArrayList<>();
 
     @ManyToMany(mappedBy = "members")
     private Set<Community> communities = new HashSet<>();

@@ -12,10 +12,10 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface ChatMapper {
-    @Mapping(target = "participantIds", source = "participants", qualifiedByName = "mapUsersToIds")
+    @Mapping(target = "participantsIds", source = "participants", qualifiedByName = "mapUsersToIds")
     ChatDTO toDTO(Chat chat);
 
-    @Mapping(target = "participants", source = "participantIds", qualifiedByName = "mapIdsToUsers")
+    @Mapping(target = "participants", source = "participantsIds", qualifiedByName = "mapIdsToUsers")
     Chat fromDTO(ChatDTO dto);
 
     @Named("mapUsersToIds")

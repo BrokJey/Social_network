@@ -128,8 +128,20 @@
                                  referencedColumnNames="id"/>
     </changeSet>
 
-    <!--MESSAGES-->
+    <!--CHATS-->
     <changeSet id="6" author="you">
+        <createTable tableName="chats">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="type" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--MESSAGES-->
+    <changeSet id="7" author="you">
         <createTable tableName="messages">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true"/>
@@ -152,18 +164,6 @@
         <addForeignKeyConstraint baseTableName="messages" baseColumnNames="sender_id"
                                  constraintName="fk_messages_sender" referencedTableName="users"
                                  referencedColumnNames="id"/>
-    </changeSet>
-
-    <!--CHATS-->
-    <changeSet id="7" author="you">
-        <createTable tableName="chats">
-            <column name="id" type="BIGINT" autoIncrement="true">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="type" type="VARCHAR(20)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
     </changeSet>
 
     <!--CHAT_PARTICIPANTS-->
