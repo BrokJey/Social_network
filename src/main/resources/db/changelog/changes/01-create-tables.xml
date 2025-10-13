@@ -235,4 +235,14 @@
                                  constraintName="fk_community_members_user" referencedTableName="users"
                                  referencedColumnNames="id"/>
     </changeSet>
+
+    <!--SEED ROLES-->
+    <changeSet id="12" author="you">
+        <insert tableName="roles">
+            <column name="name" value="ROLE_USER"/>
+        </insert>
+        <insert tableName="roles">
+            <column name="name" value="ROLE_ADMIN"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>

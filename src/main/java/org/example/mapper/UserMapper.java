@@ -26,6 +26,9 @@ public interface UserMapper {
     User fromDTO(UserDTO dto);
 
     default Set<Role> mapRoleNames(Set<String> roleNames) {
+        if (roleNames == null || roleNames.isEmpty()) {
+            return java.util.Collections.emptySet();
+        }
         return roleNames.stream()
                 .map(name -> new Role(null, RoleType.valueOf(name)))
                 .collect(Collectors.toSet());

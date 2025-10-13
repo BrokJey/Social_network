@@ -31,9 +31,11 @@ public class User {
     private String password;
 
     @NotBlank
+    @Column(name = "first_name")
     private String firstName;
 
     @NotBlank
+    @Column(name = "last_name")
     private String lastName;
 
     private Integer age;
@@ -60,6 +62,7 @@ public class User {
     @ManyToMany(mappedBy = "members")
     private Set<Community> communities = new HashSet<>();
 
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @PrePersist
