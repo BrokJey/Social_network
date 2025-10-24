@@ -1,11 +1,12 @@
 package org.example.controller;
 
-
 import lombok.RequiredArgsConstructor;
 import org.example.dto.CommunityDTO;
 import org.example.dto.UserDTO;
+import org.example.security.CustomUserDetails;
 import org.example.service.CommunityService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,29 +19,41 @@ public class CommunityController {
     private  final CommunityService communityService;
 
     //Создать сообщество
-    @PostMapping("/create/{admin}")
-    public ResponseEntity<CommunityDTO> createCommunity(@PathVariable("admin") Long adminId, @RequestParam String name, @RequestParam String description) {
+    @PostMapping("/create")
+    public ResponseEntity<CommunityDTO> createCommunity(@RequestParam String name, @RequestParam String description, Authentication authentication) {
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        Long adminId = userDetails.getId();
+        
         CommunityDTO create = communityService.createCommunity(adminId, name, description);
         return ResponseEntity.ok(create);
     }
 
     //Удалить сообщество
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteCommunity(@PathVariable("id") Long communityId, @RequestParam Long adminId) {
+    public ResponseEntity<Void> deleteCommunity(@PathVariable("id") Long communityId, Authentication authentication) {
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        Long adminId = userDetails.getId();
+        
         communityService.deleteCommunity(communityId, adminId);
         return ResponseEntity.noContent().build();
     }
 
     //Присоединиться к сообществу
-    @PostMapping("/join")
-    public ResponseEntity<Void> joinCommunity(@RequestParam Long communityId, @RequestParam Long userId) {
+    @PostMapping("/join/{communityId}")
+    public ResponseEntity<Void> joinCommunity(@PathVariable Long communityId, Authentication authentication) {
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        Long userId = userDetails.getId();
+        
         communityService.joinCommunity(communityId, userId);
         return ResponseEntity.ok().build();
     }
 
     //Покинуть сообщество
-    @PostMapping("/leave")
-    public ResponseEntity<Void> leaveCommunity(@RequestParam Long communityId, @RequestParam Long userId) {
+    @PostMapping("/leave/{communityId}")
+    public ResponseEntity<Void> leaveCommunity(@PathVariable Long communityId, Authentication authentication) {
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        Long userId = userDetails.getId();
+        
         communityService.leaveCommunity(communityId, userId);
         return ResponseEntity.ok().build();
     }
@@ -52,9 +65,12 @@ public class CommunityController {
         return ResponseEntity.ok(communityes);
     }
 
-    //Посмотреть сообщества пользователя
-    @GetMapping("/show/{userId}")
-    public ResponseEntity<List<CommunityDTO>> getUserCommunities(@PathVariable Long userId) {
+    //Посмотреть сообщества текущего пользователя
+    @GetMapping("/my-communities")
+    public ResponseEntity<List<CommunityDTO>> getMyCommunities(Authentication authentication) {
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        Long userId = userDetails.getId();
+        
         List<CommunityDTO> communities = communityService.getUserCommunities(userId);
         return ResponseEntity.ok(communities);
     }
@@ -66,16 +82,22 @@ public class CommunityController {
         return  ResponseEntity.ok(members);
     }
 
-    //Добавить пост
+    //Добавить пост в сообщество
     @PostMapping("/post/{communityId}")
-    public ResponseEntity<Void> addPostToCommunity(@PathVariable Long communityId, @RequestParam Long userId, @RequestParam String content) {
+    public ResponseEntity<Void> addPostToCommunity(@PathVariable Long communityId, @RequestParam String content, Authentication authentication) {
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        Long userId = userDetails.getId();
+        
         communityService.addPostToCommunity(communityId, userId, content);
         return ResponseEntity.ok().build();
     }
 
     //Обновить сообщество
     @PostMapping("/update/{communityId}")
-    public ResponseEntity<CommunityDTO> updateCommunity(@PathVariable Long communityId, @RequestParam Long adminId, @RequestBody CommunityDTO updatedDTO) {
+    public ResponseEntity<CommunityDTO> updateCommunity(@PathVariable Long communityId, @RequestBody CommunityDTO updatedDTO, Authentication authentication) {
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        Long adminId = userDetails.getId();
+        
         CommunityDTO update = communityService.updateCommunity(communityId, adminId, updatedDTO);
         return ResponseEntity.ok(update);
     }

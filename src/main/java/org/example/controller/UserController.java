@@ -2,8 +2,10 @@ package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dto.UserDTO;
+import org.example.security.CustomUserDetails;
 import org.example.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,17 +24,30 @@ public class UserController {
         return ResponseEntity.ok(created);
     }
 
-    //Получение пользователя по ID
+    //Получение текущего пользователя
+    @GetMapping("/me")
+    public ResponseEntity<UserDTO> getMyProfile(Authentication authentication) {
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        Long userId = userDetails.getId();
+        
+        UserDTO user = userService.getUserById(userId);
+        return ResponseEntity.ok(user);
+    }
+
+    //Получение пользователя по ID (публичная информация)
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
         UserDTO user = userService.getUserById(id);
         return ResponseEntity.ok(user);
     }
 
-    //Обновление пользователя
-    @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, UserDTO updatedDTO) {
-        UserDTO updatedUser = userService.updateUser(id, updatedDTO);
+    //Обновление текущего пользователя
+    @PutMapping("/me")
+    public ResponseEntity<UserDTO> updateMyProfile(@RequestBody UserDTO updatedDTO, Authentication authentication) {
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        Long userId = userDetails.getId();
+        
+        UserDTO updatedUser = userService.updateUser(userId, updatedDTO);
         return ResponseEntity.ok(updatedUser);
     }
 

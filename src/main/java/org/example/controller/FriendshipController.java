@@ -3,8 +3,10 @@ package org.example.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.FriendshipDTO;
 import org.example.dto.UserDTO;
+import org.example.security.CustomUserDetails;
 import org.example.service.FriendshipService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +19,11 @@ public class FriendshipController {
     private final FriendshipService friendshipService;
 
     //Отправить запрос в друзья
-    @PostMapping("/request/{sender}/{receiver}")
-    public ResponseEntity<FriendshipDTO> sendFriendRequest(@PathVariable("sender") Long sender, @PathVariable("receiver") Long receiver) {
+    @PostMapping("/request/{receiver}")
+    public ResponseEntity<FriendshipDTO> sendFriendRequest(@PathVariable("receiver") Long receiver, Authentication authentication) {
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        Long sender = userDetails.getId();
+        
         FriendshipDTO request = friendshipService.sendFriendRequest(sender, receiver);
         return ResponseEntity.ok(request);
     }
@@ -38,22 +43,32 @@ public class FriendshipController {
     }
 
     //Удалить друга
-    @DeleteMapping("/remove")
-    public ResponseEntity<Void> removeFriend(@RequestParam Long userId, @RequestParam Long friendId) {
+    @DeleteMapping("/remove/{friendId}")
+    public ResponseEntity<Void> removeFriend(@PathVariable Long friendId, Authentication authentication) {
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        Long userId = userDetails.getId();
+        
         friendshipService.removeFriend(userId, friendId);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/get/{id}")
-    public ResponseEntity<List<UserDTO>> getFriend(@PathVariable Long id) {
-        List<UserDTO> get = friendshipService.getFriends(id);
-        return ResponseEntity.ok(get);
+    //Получить список друзей текущего пользователя
+    @GetMapping("/my-friends")
+    public ResponseEntity<List<UserDTO>> getMyFriends(Authentication authentication) {
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        Long userId = userDetails.getId();
+        
+        List<UserDTO> friends = friendshipService.getFriends(userId);
+        return ResponseEntity.ok(friends);
     }
 
-    //Посмотреть запросы
-    @GetMapping("/pending/{id}")
-    public ResponseEntity<List<FriendshipDTO>> getPendingRequests(@PathVariable Long id) {
-        List<FriendshipDTO> pending = friendshipService.getPendingRequests(id);
+    //Посмотреть входящие запросы в друзья
+    @GetMapping("/pending")
+    public ResponseEntity<List<FriendshipDTO>> getPendingRequests(Authentication authentication) {
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        Long userId = userDetails.getId();
+        
+        List<FriendshipDTO> pending = friendshipService.getPendingRequests(userId);
         return ResponseEntity.ok(pending);
     }
 }
