@@ -1,10 +1,11 @@
 package org.example.service.impl;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.example.dto.CommunityDTO;
 import org.example.dto.PostDTO;
 import org.example.dto.UserDTO;
@@ -26,14 +27,23 @@ import java.util.stream.Collectors;
 @Slf4j
 public class CommunityServiceImpl implements CommunityService {
 
-    @PersistenceContext
+    @Autowired
     private EntityManager entityManager;
 
     private final CommunityMapper communityMapper;
     private final UserMapper userMapper;
 
+    @PostConstruct
+    public void debugInit() {
+        log.info(">>> EntityManager в этом экземпляре = {}", entityManager);
+        log.info(">>> Экземпляр CommunityServiceImpl = {}", System.identityHashCode(this));
+    }
+
+
     @Override
-    public final CommunityDTO createCommunity(Long adminId, String name, String description) {
+    public CommunityDTO createCommunity(Long adminId, String name, String description) {
+        log.info(">>> Вызван createCommunity() из экземпляра = {}", System.identityHashCode(this));
+
         User admin = entityManager.find(User.class, adminId);
 
         if (admin == null) {

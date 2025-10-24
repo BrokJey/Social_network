@@ -98,10 +98,20 @@ public class FriendshipServiceImplTest {
         User friend1 = User.builder().id(1L).username("Иван").build();
         UserDTO friendDto = UserDTO.builder().id(1L).username("Иван").build();
 
-        TypedQuery<User> query = mock(TypedQuery.class);
-        when(entityManager.createQuery(anyString(), eq(User.class))).thenReturn(query);
-        when(query.setParameter(anyString(), any())).thenReturn(query);
-        when(query.getResultList()).thenReturn(List.of(friend1));
+        // Мокаем два запроса: один для друзей как отправитель, другой как получатель
+        TypedQuery<User> query1 = mock(TypedQuery.class);
+        TypedQuery<User> query2 = mock(TypedQuery.class);
+        
+        when(entityManager.createQuery(anyString(), eq(User.class)))
+                .thenReturn(query1)  // Первый вызов
+                .thenReturn(query2); // Второй вызов
+        
+        when(query1.setParameter(anyString(), any())).thenReturn(query1);
+        when(query2.setParameter(anyString(), any())).thenReturn(query2);
+        
+        // Первый запрос возвращает одного друга, второй - пустой список
+        when(query1.getResultList()).thenReturn(List.of(friend1));
+        when(query2.getResultList()).thenReturn(List.of());
 
         when(userMapper.toDTO(friend1)).thenReturn(friendDto);
 

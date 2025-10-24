@@ -1,0 +1,45 @@
+2025-10-23 00:00:34.286 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2025-10-23 00:00:34.405 [main] INFO  org.example.Main - Starting Main using Java 17.0.14 with PID 16984 (C:\Users\danil\OneDrive\Desktop\Social_network1\target\classes started by danil in C:\Users\danil\OneDrive\Desktop\Social_network1)
+2025-10-23 00:00:34.410 [main] INFO  org.example.Main - No active profile set, falling back to 1 default profile: "default"
+2025-10-23 00:00:36.545 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-23 00:00:36.674 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 110 ms. Found 2 JPA repository interfaces.
+2025-10-23 00:00:37.594 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-10-23 00:00:37.624 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-10-23 00:00:37.626 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-10-23 00:00:37.626 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-10-23 00:00:37.743 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-10-23 00:00:37.743 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3250 ms
+2025-10-23 00:00:38.021 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-10-23 00:00:38.304 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@59018eed
+2025-10-23 00:00:38.304 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-10-23 00:00:38.677 [main] INFO  liquibase.database - Set default schema name to public
+2025-10-23 00:00:39.794 [main] INFO  liquibase.changelog - Reading from public.databasechangelog
+2025-10-23 00:00:39.884 [main] INFO  liquibase.ui - Database is up to date, no changesets to execute
+2025-10-23 00:00:39.888 [main] INFO  liquibase.changelog - Reading from public.databasechangelog
+2025-10-23 00:00:39.900 [main] INFO  liquibase.util - UPDATE SUMMARY
+2025-10-23 00:00:39.902 [main] INFO  liquibase.util - Run:                          0
+2025-10-23 00:00:39.902 [main] INFO  liquibase.util - Previously run:              11
+2025-10-23 00:00:39.902 [main] INFO  liquibase.util - Filtered out:                 0
+2025-10-23 00:00:39.902 [main] INFO  liquibase.util - -------------------------------
+2025-10-23 00:00:39.902 [main] INFO  liquibase.util - Total change sets:           11
+2025-10-23 00:00:39.902 [main] INFO  liquibase.util - Update summary generated
+2025-10-23 00:00:39.904 [main] INFO  liquibase.command - Command execution complete
+2025-10-23 00:00:39.967 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-23 00:00:40.079 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-10-23 00:00:40.122 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-10-23 00:00:40.576 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-23 00:00:41.954 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-23 00:00:41.954 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-23 00:00:42.569 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-10-23 00:00:42.613 [main] INFO  o.e.s.impl.CommunityServiceImpl - >>> EntityManager в этом экземпляре = Shared EntityManager proxy for target factory [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean@20c55658]
+2025-10-23 00:00:42.615 [main] INFO  o.e.s.impl.CommunityServiceImpl - >>> Экземпляр CommunityServiceImpl = 938070417
+2025-10-23 00:00:42.724 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-23 00:00:43.216 [main] DEBUG o.s.s.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-10-23 00:00:43.557 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-10-23 00:00:43.576 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-10-23 00:00:43.599 [main] INFO  org.example.Main - Started Main in 10.246 seconds (process running for 11.13)
+2025-10-23 00:50:38.053 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-23 00:50:38.117 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-10-23 00:50:38.117 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-23 00:50:38.117 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-10-23 00:50:38.133 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

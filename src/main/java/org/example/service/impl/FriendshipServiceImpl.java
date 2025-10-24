@@ -16,6 +16,7 @@ import org.example.service.FriendshipService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -131,17 +132,30 @@ public class FriendshipServiceImpl implements FriendshipService {
 
     @Override
     public List<UserDTO> getFriends(Long userId) {
-        List<User> friends = entityManager.createQuery("SELECT CASE WHEN f.requester.id = :userId THEN f.receiver ELSE f.requester END " +
-                "FROM Friendship f " +
-                "WHERE (f.requester.id = :userId OR f.receiver.id = :userId)" +
-                "AND f.status = :status", User.class)
+        // Получаем друзей, где пользователь является отправителем запроса
+        List<User> friendsAsRequester = entityManager.createQuery(
+                "SELECT f.receiver FROM Friendship f " +
+                "WHERE f.requester.id = :userId AND f.status = :status", User.class)
                 .setParameter("userId", userId)
                 .setParameter("status", FriendshipStatus.ACCEPTED)
                 .getResultList();
 
-        log.info("Info: найдено {} друзей для пользователя {}", friends.size(), userId);
+        // Получаем друзей, где пользователь является получателем запроса
+        List<User> friendsAsReceiver = entityManager.createQuery(
+                "SELECT f.requester FROM Friendship f " +
+                "WHERE f.receiver.id = :userId AND f.status = :status", User.class)
+                .setParameter("userId", userId)
+                .setParameter("status", FriendshipStatus.ACCEPTED)
+                .getResultList();
 
-        return friends.stream()
+        // Объединяем списки
+        List<User> allFriends = new ArrayList<>();
+        allFriends.addAll(friendsAsRequester);
+        allFriends.addAll(friendsAsReceiver);
+
+        log.info("Info: найдено {} друзей для пользователя {}", allFriends.size(), userId);
+
+        return allFriends.stream()
                 .map(userMapper::toDTO)
                 .toList();
     }

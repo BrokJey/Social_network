@@ -29,6 +29,7 @@ public class Comment {
     @JoinColumn(name = "post_id")
     private Post post;
 
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @PrePersist

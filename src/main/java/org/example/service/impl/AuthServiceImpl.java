@@ -41,19 +41,21 @@ public class AuthServiceImpl implements AuthService {
             throw new RuntimeException("Пользователь с таким логином уже существует");
         }
 
-        Role userRole = roleRepository.findByName(org.example.entity.enums.RoleType.ROLE_USER)
+        Role userRole = roleRepository.findByName("ROLE_USER")
                 .orElseThrow(() -> new RuntimeException("Роль USER не найдена"));
 
-        // Создаём пользователя сразу с обязательными полями,
-        // чтобы пройти Bean Validation (@NotBlank)
-        User user = User.builder()
+        UserDTO userDTO = UserDTO.builder()
                 .username(request.getUsername())
                 .firstName(request.getUsername())
-                .lastName(request.getUsername())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .roles(Set.of(userRole))
                 .build();
 
+        UserDTO savedUser = userService.registerUser(userDTO);
+
+        User user = userRepository.findById(savedUser.getId())
+                .orElseThrow(() -> new RuntimeException("Ошибка при регистрации"));
+
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setRoles(Set.of(userRole));
         userRepository.save(user);
 
         String token = jwtTokenProvider.generateToken(user.getUsername());

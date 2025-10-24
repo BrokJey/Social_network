@@ -1,0 +1,165 @@
+2025-10-22 00:17:51.186 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing DELETE /community/delete/1?adminId=1
+2025-10-22 00:17:51.193 [http-nio-8080-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-22 00:17:51.194 [http-nio-8080-exec-5] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2025-10-22 00:17:51.202 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing DELETE /error?adminId=1
+2025-10-22 00:17:51.202 [http-nio-8080-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-22 00:17:51.203 [http-nio-8080-exec-5] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2025-10-22 00:18:29.112 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing DELETE /community/delete/1?adminId=1
+2025-10-22 00:18:29.112 [http-nio-8080-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-22 00:18:29.112 [http-nio-8080-exec-6] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2025-10-22 00:18:29.113 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing DELETE /error?adminId=1
+2025-10-22 00:18:29.113 [http-nio-8080-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-22 00:18:29.113 [http-nio-8080-exec-6] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2025-10-22 00:19:06.400 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing POST /auth/login
+2025-10-22 00:19:06.400 [http-nio-8080-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-22 00:19:06.400 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured POST /auth/login
+2025-10-22 00:19:06.527 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - select u1_0.id,u1_0.age,u1_0.created_at,u1_0.first_name,u1_0.gender,u1_0.last_name,u1_0.password,u1_0.username from Users u1_0 where u1_0.username=?
+2025-10-22 00:19:06.543 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - select r1_0.user_id,r1_1.id,r1_1.name from user_roles r1_0 join Roles r1_1 on r1_1.id=r1_0.role_id where r1_0.user_id=?
+2025-10-22 00:19:06.614 [http-nio-8080-exec-7] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2025-10-22 00:19:28.161 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing DELETE /community/delete/1?adminId=1
+2025-10-22 00:19:28.166 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - select u1_0.id,u1_0.age,u1_0.created_at,u1_0.first_name,u1_0.gender,u1_0.last_name,u1_0.password,u1_0.username from Users u1_0 where u1_0.username=?
+2025-10-22 00:19:28.168 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - select r1_0.user_id,r1_1.id,r1_1.name from user_roles r1_0 join Roles r1_1 on r1_1.id=r1_0.role_id where r1_0.user_id=?
+2025-10-22 00:19:28.169 [http-nio-8080-exec-8] INFO  o.e.security.JwtAuthenticationFilter - Info: Пользователь testuser успешно аутенфицирован
+2025-10-22 00:19:28.169 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured DELETE /community/delete/1?adminId=1
+2025-10-22 00:19:28.173 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - select c1_0.id,c1_0.admin_id,c1_0.created_at,c1_0.description,c1_0.name from Communities c1_0 where c1_0.id=?
+2025-10-22 00:19:28.182 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - select p1_0.community_id,p1_0.id,p1_0.author_id,p1_0.content,p1_0.created_at from Posts p1_0 where p1_0.community_id=?
+2025-10-22 00:19:28.186 [http-nio-8080-exec-8] INFO  o.e.s.impl.CommunityServiceImpl - Info: сообщество с id = 1 удалено
+2025-10-22 00:19:28.191 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - delete from community_members where community_id=?
+2025-10-22 00:19:28.198 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - delete from Communities where id=?
+2025-10-22 00:21:14.940 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing POST /community/create/1?name=%D0%9D%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5&description=%D0%9E%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5
+2025-10-22 00:21:14.944 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - select u1_0.id,u1_0.age,u1_0.created_at,u1_0.first_name,u1_0.gender,u1_0.last_name,u1_0.password,u1_0.username from Users u1_0 where u1_0.username=?
+2025-10-22 00:21:14.946 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - select r1_0.user_id,r1_1.id,r1_1.name from user_roles r1_0 join Roles r1_1 on r1_1.id=r1_0.role_id where r1_0.user_id=?
+2025-10-22 00:21:14.947 [http-nio-8080-exec-1] INFO  o.e.security.JwtAuthenticationFilter - Info: Пользователь testuser успешно аутенфицирован
+2025-10-22 00:21:14.947 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured POST /community/create/1?name=%D0%9D%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5&description=%D0%9E%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5
+2025-10-22 00:21:14.949 [http-nio-8080-exec-1] INFO  o.e.s.impl.CommunityServiceImpl - >>> Вызван createCommunity() из экземпляра = 614441675
+2025-10-22 00:21:14.949 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - select u1_0.id,u1_0.age,u1_0.created_at,u1_0.first_name,u1_0.gender,u1_0.last_name,u1_0.password,r1_0.user_id,r1_1.id,r1_1.name,u1_0.username from Users u1_0 left join user_roles r1_0 on u1_0.id=r1_0.user_id left join Roles r1_1 on r1_1.id=r1_0.role_id where u1_0.id=?
+2025-10-22 00:21:14.952 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - insert into Communities (admin_id,created_at,description,name) values (?,?,?,?)
+2025-10-22 00:21:14.953 [http-nio-8080-exec-1] INFO  o.e.s.impl.CommunityServiceImpl - Info: сообщество 'Название' создано администратором с id 1
+2025-10-22 00:22:19.461 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing POST /community/join?communityId=2&userId=2
+2025-10-22 00:22:19.461 [http-nio-8080-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-22 00:22:19.461 [http-nio-8080-exec-4] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2025-10-22 00:22:19.462 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing POST /error?communityId=2&userId=2
+2025-10-22 00:22:19.463 [http-nio-8080-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-22 00:22:19.463 [http-nio-8080-exec-4] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2025-10-22 00:22:34.124 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing POST /community/join?communityId=2&userId=2
+2025-10-22 00:22:34.131 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - select u1_0.id,u1_0.age,u1_0.created_at,u1_0.first_name,u1_0.gender,u1_0.last_name,u1_0.password,u1_0.username from Users u1_0 where u1_0.username=?
+2025-10-22 00:22:34.132 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - select r1_0.user_id,r1_1.id,r1_1.name from user_roles r1_0 join Roles r1_1 on r1_1.id=r1_0.role_id where r1_0.user_id=?
+2025-10-22 00:22:34.133 [http-nio-8080-exec-5] INFO  o.e.security.JwtAuthenticationFilter - Info: Пользователь testuser успешно аутенфицирован
+2025-10-22 00:22:34.133 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured POST /community/join?communityId=2&userId=2
+2025-10-22 00:22:34.135 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - select c1_0.id,c1_0.admin_id,c1_0.created_at,c1_0.description,c1_0.name from Communities c1_0 where c1_0.id=?
+2025-10-22 00:22:34.136 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - select u1_0.id,u1_0.age,u1_0.created_at,u1_0.first_name,u1_0.gender,u1_0.last_name,u1_0.password,r1_0.user_id,r1_1.id,r1_1.name,u1_0.username from Users u1_0 left join user_roles r1_0 on u1_0.id=r1_0.user_id left join Roles r1_1 on r1_1.id=r1_0.role_id where u1_0.id=?
+2025-10-22 00:22:34.137 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - select m1_0.community_id,m1_1.id,m1_1.age,m1_1.created_at,m1_1.first_name,m1_1.gender,m1_1.last_name,m1_1.password,r1_0.user_id,r1_1.id,r1_1.name,m1_1.username from community_members m1_0 join Users m1_1 on m1_1.id=m1_0.user_id left join user_roles r1_0 on m1_1.id=r1_0.user_id left join Roles r1_1 on r1_1.id=r1_0.role_id where m1_0.community_id=?
+2025-10-22 00:22:34.141 [http-nio-8080-exec-5] INFO  o.e.s.impl.CommunityServiceImpl - Info: пользователь 2 присоединился к сообществу 2
+2025-10-22 00:22:34.146 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - insert into community_members (community_id,user_id) values (?,?)
+2025-10-22 00:42:18.032 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /community/all
+2025-10-22 00:42:18.032 [http-nio-8080-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-22 00:42:18.032 [http-nio-8080-exec-8] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2025-10-22 00:42:18.033 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2025-10-22 00:42:18.033 [http-nio-8080-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-22 00:42:18.034 [http-nio-8080-exec-8] DEBUG o.s.s.w.a.Http403ForbiddenEntryPoint - Pre-authenticated entry point called. Rejecting access
+2025-10-22 00:42:36.518 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /community/all
+2025-10-22 00:42:36.524 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - select u1_0.id,u1_0.age,u1_0.created_at,u1_0.first_name,u1_0.gender,u1_0.last_name,u1_0.password,u1_0.username from Users u1_0 where u1_0.username=?
+2025-10-22 00:42:36.528 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - select r1_0.user_id,r1_1.id,r1_1.name from user_roles r1_0 join Roles r1_1 on r1_1.id=r1_0.role_id where r1_0.user_id=?
+2025-10-22 00:42:36.531 [http-nio-8080-exec-9] INFO  o.e.security.JwtAuthenticationFilter - Info: Пользователь testuser успешно аутенфицирован
+2025-10-22 00:42:36.531 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /community/all
+2025-10-22 00:42:36.784 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - select c1_0.id,c1_0.admin_id,c1_0.created_at,c1_0.description,c1_0.name from Communities c1_0
+2025-10-22 00:42:36.788 [http-nio-8080-exec-9] INFO  o.e.s.impl.CommunityServiceImpl - Info: найдено всего сообществ: 1
+2025-10-22 00:44:24.996 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /community/show/1
+2025-10-22 00:44:25.002 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - select u1_0.id,u1_0.age,u1_0.created_at,u1_0.first_name,u1_0.gender,u1_0.last_name,u1_0.password,u1_0.username from Users u1_0 where u1_0.username=?
+2025-10-22 00:44:25.003 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - select r1_0.user_id,r1_1.id,r1_1.name from user_roles r1_0 join Roles r1_1 on r1_1.id=r1_0.role_id where r1_0.user_id=?
+2025-10-22 00:44:25.004 [http-nio-8080-exec-2] INFO  o.e.security.JwtAuthenticationFilter - Info: Пользователь testuser успешно аутенфицирован
+2025-10-22 00:44:25.005 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /community/show/1
+2025-10-22 00:44:25.036 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - select c1_0.id,c1_0.admin_id,c1_0.created_at,c1_0.description,c1_0.name from Communities c1_0 join community_members m1_0 on c1_0.id=m1_0.community_id where m1_0.user_id=?
+2025-10-22 00:44:25.039 [http-nio-8080-exec-2] INFO  o.e.s.impl.CommunityServiceImpl - Info: количество сообществ пользователя 1 = 0
+2025-10-22 00:44:29.996 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /community/show/2
+2025-10-22 00:44:30.000 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - select u1_0.id,u1_0.age,u1_0.created_at,u1_0.first_name,u1_0.gender,u1_0.last_name,u1_0.password,u1_0.username from Users u1_0 where u1_0.username=?
+2025-10-22 00:44:30.002 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - select r1_0.user_id,r1_1.id,r1_1.name from user_roles r1_0 join Roles r1_1 on r1_1.id=r1_0.role_id where r1_0.user_id=?
+2025-10-22 00:44:30.003 [http-nio-8080-exec-3] INFO  o.e.security.JwtAuthenticationFilter - Info: Пользователь testuser успешно аутенфицирован
+2025-10-22 00:44:30.003 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /community/show/2
+2025-10-22 00:44:30.005 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - select c1_0.id,c1_0.admin_id,c1_0.created_at,c1_0.description,c1_0.name from Communities c1_0 join community_members m1_0 on c1_0.id=m1_0.community_id where m1_0.user_id=?
+2025-10-22 00:44:30.006 [http-nio-8080-exec-3] INFO  o.e.s.impl.CommunityServiceImpl - Info: количество сообществ пользователя 2 = 1
+2025-10-22 00:46:16.695 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /community/members/2
+2025-10-22 00:46:16.700 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - select u1_0.id,u1_0.age,u1_0.created_at,u1_0.first_name,u1_0.gender,u1_0.last_name,u1_0.password,u1_0.username from Users u1_0 where u1_0.username=?
+2025-10-22 00:46:16.702 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - select r1_0.user_id,r1_1.id,r1_1.name from user_roles r1_0 join Roles r1_1 on r1_1.id=r1_0.role_id where r1_0.user_id=?
+2025-10-22 00:46:16.703 [http-nio-8080-exec-6] INFO  o.e.security.JwtAuthenticationFilter - Info: Пользователь testuser успешно аутенфицирован
+2025-10-22 00:46:16.703 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /community/members/2
+2025-10-22 00:46:16.706 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - select c1_0.id,c1_0.admin_id,c1_0.created_at,c1_0.description,c1_0.name from Communities c1_0 where c1_0.id=?
+2025-10-22 00:46:16.708 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - select m1_0.community_id,m1_1.id,m1_1.age,m1_1.created_at,m1_1.first_name,m1_1.gender,m1_1.last_name,m1_1.password,r1_0.user_id,r1_1.id,r1_1.name,m1_1.username from community_members m1_0 join Users m1_1 on m1_1.id=m1_0.user_id left join user_roles r1_0 on m1_1.id=r1_0.user_id left join Roles r1_1 on r1_1.id=r1_0.role_id where m1_0.community_id=?
+2025-10-22 00:46:16.722 [http-nio-8080-exec-6] INFO  o.e.s.impl.CommunityServiceImpl - Info: количество участников сообщества 1
+2025-10-22 23:42:28.289 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2025-10-22 23:42:28.389 [main] INFO  org.example.Main - Starting Main using Java 17.0.14 with PID 18788 (C:\Users\danil\OneDrive\Desktop\Social_network1\target\classes started by danil in C:\Users\danil\OneDrive\Desktop\Social_network1)
+2025-10-22 23:42:28.389 [main] INFO  org.example.Main - No active profile set, falling back to 1 default profile: "default"
+2025-10-22 23:42:30.432 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-22 23:42:30.552 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 107 ms. Found 2 JPA repository interfaces.
+2025-10-22 23:42:31.549 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-10-22 23:42:31.575 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-10-22 23:42:31.580 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-10-22 23:42:31.580 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-10-22 23:42:31.725 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-10-22 23:42:31.729 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3287 ms
+2025-10-22 23:42:31.986 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-10-22 23:42:32.278 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@243bf087
+2025-10-22 23:42:32.278 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-10-22 23:42:32.542 [main] INFO  liquibase.database - Set default schema name to public
+2025-10-22 23:42:33.276 [main] INFO  liquibase.changelog - Reading from public.databasechangelog
+2025-10-22 23:42:33.339 [main] INFO  liquibase.ui - Database is up to date, no changesets to execute
+2025-10-22 23:42:33.355 [main] INFO  liquibase.changelog - Reading from public.databasechangelog
+2025-10-22 23:42:33.355 [main] INFO  liquibase.util - UPDATE SUMMARY
+2025-10-22 23:42:33.355 [main] INFO  liquibase.util - Run:                          0
+2025-10-22 23:42:33.355 [main] INFO  liquibase.util - Previously run:              11
+2025-10-22 23:42:33.355 [main] INFO  liquibase.util - Filtered out:                 0
+2025-10-22 23:42:33.355 [main] INFO  liquibase.util - -------------------------------
+2025-10-22 23:42:33.355 [main] INFO  liquibase.util - Total change sets:           11
+2025-10-22 23:42:33.355 [main] INFO  liquibase.util - Update summary generated
+2025-10-22 23:42:33.371 [main] INFO  liquibase.command - Command execution complete
+2025-10-22 23:42:33.422 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-22 23:42:33.514 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-10-22 23:42:33.561 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-10-22 23:42:33.928 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-22 23:42:35.167 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-22 23:42:35.167 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-22 23:42:35.659 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-10-22 23:42:35.690 [main] INFO  o.e.s.impl.CommunityServiceImpl - >>> EntityManager в этом экземпляре = Shared EntityManager proxy for target factory [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean@52984065]
+2025-10-22 23:42:35.690 [main] INFO  o.e.s.impl.CommunityServiceImpl - >>> Экземпляр CommunityServiceImpl = 382934088
+2025-10-22 23:42:35.781 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-22 23:42:36.166 [main] DEBUG o.s.s.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-10-22 23:42:36.421 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-10-22 23:42:36.437 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-10-22 23:42:36.452 [main] INFO  org.example.Main - Started Main in 8.733 seconds (process running for 9.389)
+2025-10-22 23:43:37.864 [http-nio-8080-exec-4] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-22 23:43:37.865 [http-nio-8080-exec-4] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-10-22 23:43:37.867 [http-nio-8080-exec-4] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-10-22 23:43:37.896 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing POST /auth/login
+2025-10-22 23:43:37.906 [http-nio-8080-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-22 23:43:37.907 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured POST /auth/login
+2025-10-22 23:43:38.315 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - select u1_0.id,u1_0.age,u1_0.created_at,u1_0.first_name,u1_0.gender,u1_0.last_name,u1_0.password,u1_0.username from Users u1_0 where u1_0.username=?
+2025-10-22 23:43:38.353 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - select r1_0.user_id,r1_1.id,r1_1.name from user_roles r1_0 join Roles r1_1 on r1_1.id=r1_0.role_id where r1_0.user_id=?
+2025-10-22 23:43:38.442 [http-nio-8080-exec-4] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2025-10-22 23:46:09.689 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing POST /auth/login
+2025-10-22 23:46:09.689 [http-nio-8080-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-22 23:46:09.689 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured POST /auth/login
+2025-10-22 23:46:09.693 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - select u1_0.id,u1_0.age,u1_0.created_at,u1_0.first_name,u1_0.gender,u1_0.last_name,u1_0.password,u1_0.username from Users u1_0 where u1_0.username=?
+2025-10-22 23:46:09.695 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - select r1_0.user_id,r1_1.id,r1_1.name from user_roles r1_0 join Roles r1_1 on r1_1.id=r1_0.role_id where r1_0.user_id=?
+2025-10-22 23:46:09.758 [http-nio-8080-exec-5] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2025-10-22 23:46:45.643 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing POST /community/post/2?userId=1&content=%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82%20%D0%B2%D1%81%D0%B5%D0%BC%20%D0%B2%20%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D1%81%D1%82%D0%B2%D0%B5!
+2025-10-22 23:46:45.699 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - select u1_0.id,u1_0.age,u1_0.created_at,u1_0.first_name,u1_0.gender,u1_0.last_name,u1_0.password,u1_0.username from Users u1_0 where u1_0.username=?
+2025-10-22 23:46:45.702 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - select r1_0.user_id,r1_1.id,r1_1.name from user_roles r1_0 join Roles r1_1 on r1_1.id=r1_0.role_id where r1_0.user_id=?
+2025-10-22 23:46:45.703 [http-nio-8080-exec-6] INFO  o.e.security.JwtAuthenticationFilter - Info: Пользователь testuser успешно аутенфицирован
+2025-10-22 23:46:45.704 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured POST /community/post/2?userId=1&content=%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82%20%D0%B2%D1%81%D0%B5%D0%BC%20%D0%B2%20%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D1%81%D1%82%D0%B2%D0%B5!
+2025-10-22 23:46:45.723 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - select c1_0.id,c1_0.admin_id,c1_0.created_at,c1_0.description,c1_0.name from Communities c1_0 where c1_0.id=?
+2025-10-22 23:46:45.734 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - select u1_0.id,u1_0.age,u1_0.created_at,u1_0.first_name,u1_0.gender,u1_0.last_name,u1_0.password,r1_0.user_id,r1_1.id,r1_1.name,u1_0.username from Users u1_0 left join user_roles r1_0 on u1_0.id=r1_0.user_id left join Roles r1_1 on r1_1.id=r1_0.role_id where u1_0.id=?
+2025-10-22 23:46:45.777 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - insert into Posts (author_id,community_id,content,created_at) values (?,?,?,?)
+2025-10-22 23:46:45.802 [http-nio-8080-exec-6] INFO  o.e.s.impl.CommunityServiceImpl - Info: новый пост 2 добавлен в сообщество 2
+2025-10-22 23:49:31.533 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /posts/community/2
+2025-10-22 23:49:31.538 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - select u1_0.id,u1_0.age,u1_0.created_at,u1_0.first_name,u1_0.gender,u1_0.last_name,u1_0.password,u1_0.username from Users u1_0 where u1_0.username=?
+2025-10-22 23:49:31.541 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - select r1_0.user_id,r1_1.id,r1_1.name from user_roles r1_0 join Roles r1_1 on r1_1.id=r1_0.role_id where r1_0.user_id=?
+2025-10-22 23:49:31.542 [http-nio-8080-exec-9] INFO  o.e.security.JwtAuthenticationFilter - Info: Пользователь testuser успешно аутенфицирован
+2025-10-22 23:49:31.543 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /posts/community/2
+2025-10-22 23:49:31.545 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - select c1_0.id,c1_0.admin_id,c1_0.created_at,c1_0.description,c1_0.name from Communities c1_0 where c1_0.id=?
+2025-10-22 23:49:31.787 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - select p1_0.id,p1_0.author_id,p1_0.community_id,p1_0.content,p1_0.created_at from Posts p1_0 where p1_0.community_id=?
+2025-10-22 23:49:31.790 [http-nio-8080-exec-9] INFO  o.e.service.impl.PostServiceImpl - Info: найдено постов сообщества 2: 1
+2025-10-22 23:55:01.780 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-22 23:55:01.863 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-10-22 23:55:01.876 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-22 23:55:01.886 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-10-22 23:55:01.894 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

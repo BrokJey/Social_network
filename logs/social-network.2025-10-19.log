@@ -1,0 +1,69 @@
+2025-10-19 14:26:55.379 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2025-10-19 14:26:55.453 [main] INFO  org.example.Main - Starting Main using Java 23.0.1 with PID 12108 (C:\Users\danil\OneDrive\Desktop\Social_network1\target\classes started by danil in C:\Users\danil\OneDrive\Desktop\Social_network1)
+2025-10-19 14:26:55.453 [main] INFO  org.example.Main - No active profile set, falling back to 1 default profile: "default"
+2025-10-19 14:26:56.197 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-19 14:26:56.281 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 71 ms. Found 2 JPA repository interfaces.
+2025-10-19 14:26:56.820 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-10-19 14:26:56.835 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-10-19 14:26:56.835 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-10-19 14:26:56.835 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-10-19 14:26:56.895 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-10-19 14:26:56.895 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1396 ms
+2025-10-19 14:26:57.013 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-10-19 14:26:57.159 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@61b65d54
+2025-10-19 14:26:57.159 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-10-19 14:26:57.336 [main] INFO  liquibase.database - Set default schema name to public
+2025-10-19 14:26:57.837 [main] INFO  liquibase.changelog - Reading from public.databasechangelog
+2025-10-19 14:26:57.910 [main] INFO  liquibase.ui - Database is up to date, no changesets to execute
+2025-10-19 14:26:57.910 [main] INFO  liquibase.changelog - Reading from public.databasechangelog
+2025-10-19 14:26:57.921 [main] INFO  liquibase.util - UPDATE SUMMARY
+2025-10-19 14:26:57.921 [main] INFO  liquibase.util - Run:                          0
+2025-10-19 14:26:57.921 [main] INFO  liquibase.util - Previously run:              11
+2025-10-19 14:26:57.921 [main] INFO  liquibase.util - Filtered out:                 0
+2025-10-19 14:26:57.921 [main] INFO  liquibase.util - -------------------------------
+2025-10-19 14:26:57.921 [main] INFO  liquibase.util - Total change sets:           11
+2025-10-19 14:26:57.921 [main] INFO  liquibase.util - Update summary generated
+2025-10-19 14:26:57.921 [main] INFO  liquibase.command - Command execution complete
+2025-10-19 14:26:57.973 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-19 14:26:58.049 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-10-19 14:26:58.089 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-10-19 14:26:58.422 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-19 14:26:59.533 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-19 14:26:59.536 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-19 14:26:59.901 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-10-19 14:26:59.928 [main] WARN  o.s.aop.framework.CglibAopProxy - Unable to proxy interface-implementing method [public final org.example.dto.CommunityDTO org.example.service.impl.CommunityServiceImpl.createCommunity(java.lang.Long,java.lang.String,java.lang.String)] because it is marked as final, consider using interface-based JDK proxies instead.
+2025-10-19 14:26:59.988 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-19 14:27:00.245 [main] DEBUG o.s.s.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-10-19 14:27:00.423 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-10-19 14:27:00.441 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-10-19 14:27:00.449 [main] INFO  org.example.Main - Started Main in 5.551 seconds (process running for 5.923)
+2025-10-19 14:27:30.810 [http-nio-8080-exec-2] INFO  o.a.coyote.http11.Http11Processor - Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x070x000x010x000x060xfc0x030x030xa10xa8^0xb3N0xb50x150xc2a0xe9so0xbeEf0x920x876vhZ0xe620x8e*k7E0xef`aV ]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:409)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:270)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1743)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+2025-10-19 14:40:54.021 [http-nio-8080-exec-10] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-19 14:40:54.022 [http-nio-8080-exec-10] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-10-19 14:40:54.023 [http-nio-8080-exec-10] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-10-19 14:40:54.043 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Securing POST /auth/login
+2025-10-19 14:40:54.051 [http-nio-8080-exec-10] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-10-19 14:40:54.053 [http-nio-8080-exec-10] DEBUG o.s.security.web.FilterChainProxy - Secured POST /auth/login
+2025-10-19 14:40:54.348 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - select u1_0.id,u1_0.age,u1_0.created_at,u1_0.first_name,u1_0.gender,u1_0.last_name,u1_0.password,u1_0.username from Users u1_0 where u1_0.username=?
+2025-10-19 14:40:54.380 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - select r1_0.user_id,r1_1.id,r1_1.name from user_roles r1_0 join Roles r1_1 on r1_1.id=r1_0.role_id where r1_0.user_id=?
+2025-10-19 14:40:54.473 [http-nio-8080-exec-10] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Authenticated user
+2025-10-19 14:41:05.411 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /friendships/pending/2
+2025-10-19 14:41:05.465 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - select u1_0.id,u1_0.age,u1_0.created_at,u1_0.first_name,u1_0.gender,u1_0.last_name,u1_0.password,u1_0.username from Users u1_0 where u1_0.username=?
+2025-10-19 14:41:05.467 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - select r1_0.user_id,r1_1.id,r1_1.name from user_roles r1_0 join Roles r1_1 on r1_1.id=r1_0.role_id where r1_0.user_id=?
+2025-10-19 14:41:05.468 [http-nio-8080-exec-2] INFO  o.e.security.JwtAuthenticationFilter - Info: Пользователь testuser успешно аутенфицирован
+2025-10-19 14:41:05.468 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /friendships/pending/2
+2025-10-19 14:41:05.685 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - select f1_0.id,f1_0.created_at,f1_0.receiver_id,f1_0.requester_id,f1_0.status from Friendships f1_0 where f1_0.receiver_id=? and f1_0.status=?
+2025-10-19 14:41:05.693 [http-nio-8080-exec-2] INFO  o.e.s.impl.FriendshipServiceImpl - Info: найдено 1 входящих запросов в друзья для пользователя 2
+2025-10-19 23:51:39.778 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8h8m11s310ms335µs300ns).

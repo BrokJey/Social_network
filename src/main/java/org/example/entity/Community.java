@@ -42,6 +42,7 @@ public class Community {
     @OneToMany(mappedBy = "community", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts = new ArrayList<>();
 
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @PrePersist

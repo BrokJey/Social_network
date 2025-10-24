@@ -29,6 +29,7 @@ public class Friendship {
     @Enumerated(EnumType.STRING)
     private FriendshipStatus status;
 
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @PrePersist

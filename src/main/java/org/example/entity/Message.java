@@ -6,7 +6,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Messages")
+@Table(name = "messages")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -29,6 +29,7 @@ public class Message {
     @JoinColumn(name = "sender_id")
     private User sender;
 
+    @Column(name = "sent_at")
     private LocalDateTime sentAt;
 
     @PrePersist

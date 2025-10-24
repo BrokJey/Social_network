@@ -68,9 +68,10 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public List<MessageDTO> getMessageBetweenUsers(Long userId1, Long userId2) {
         List<Chat> chats = entityManager.createQuery(
-                "SELECT c FROM Chat c JOIN c.participants p1 JOIN c.participants p2 WHERE p1.id = :userId1 AND p2.id = :userId2 AND c.isGroup = false", Chat.class)
+                "SELECT c FROM Chat c JOIN c.participants p1 JOIN c.participants p2 WHERE p1.id = :userId1 AND p2.id = :userId2 AND c.type = :chatType", Chat.class)
                 .setParameter("userId1", userId1)
                 .setParameter("userId2", userId2)
+                .setParameter("chatType", org.example.entity.enums.ChatType.PRIVATE)
                 .getResultList();
 
         if (chats.isEmpty()) {

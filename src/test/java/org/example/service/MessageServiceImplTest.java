@@ -121,6 +121,7 @@ public class MessageServiceImplTest {
         when(entityManager.createQuery(startsWith("SELECT c FROM Chat"), eq(Chat.class))).thenReturn(chatQuery);
         when(chatQuery.setParameter(eq("userId1"), eq(1L))).thenReturn(chatQuery);
         when(chatQuery.setParameter(eq("userId2"), eq(2L))).thenReturn(chatQuery);
+        when(chatQuery.setParameter(eq("chatType"), any())).thenReturn(chatQuery);
         when(chatQuery.getResultList()).thenReturn(List.of(chat));
 
         when(entityManager.createQuery(startsWith("SELECT m FROM Message"), eq(Message.class))).thenReturn(messagesQuery);
