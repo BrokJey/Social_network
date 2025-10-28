@@ -13,7 +13,6 @@ import org.example.repository.RoleRepository;
 import org.example.repository.UserRepository;
 import org.example.security.JwtTokenProvider;
 import org.example.service.AuthService;
-import org.example.service.UserService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,7 +27,6 @@ import java.util.Set;
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
-    private final UserService userService;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
@@ -41,21 +39,17 @@ public class AuthServiceImpl implements AuthService {
             throw new RuntimeException("Пользователь с таким логином уже существует");
         }
 
-        Role userRole = roleRepository.findByName("ROLE_USER")
+        Role userRole = roleRepository.findByName(org.example.entity.enums.RoleType.ROLE_USER)
                 .orElseThrow(() -> new RuntimeException("Роль USER не найдена"));
 
-        UserDTO userDTO = UserDTO.builder()
+        User user = User.builder()
                 .username(request.getUsername())
                 .firstName(request.getUsername())
+                .lastName(request.getUsername()) // Добавляем lastName для @NotBlank
+                .password(passwordEncoder.encode(request.getPassword()))
+                .roles(Set.of(userRole))
                 .build();
 
-        UserDTO savedUser = userService.registerUser(userDTO);
-
-        User user = userRepository.findById(savedUser.getId())
-                .orElseThrow(() -> new RuntimeException("Ошибка при регистрации"));
-
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRoles(Set.of(userRole));
         userRepository.save(user);
 
         String token = jwtTokenProvider.generateToken(user.getUsername());

@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.dto.RoleDTO;
 import org.example.entity.Role;
 import org.example.entity.User;
+import org.example.entity.enums.RoleType;
 import org.example.mapper.RoleMapper;
 import org.example.service.RoleService;
 import org.springframework.stereotype.Service;
@@ -63,7 +64,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Optional<RoleDTO> getRoleByName(String name) {
         TypedQuery<Role> query = entityManager.createQuery("SELECT r FROM Role r WHERE r.name = :name", Role.class);
-        query.setParameter("name", name);
+        query.setParameter("name", RoleType.valueOf(name)); // Преобразуем String в RoleType
         List<Role> roles = query.getResultList();
         if (roles.isEmpty()) {
             log.error("Error: Роли не найдены с именем: {}", name);

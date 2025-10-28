@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Network - Дашборд</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="dashboard.html">
+                <i class="fas fa-users"></i> Social Network
+            </a>
+            <div class="navbar-nav ms-auto">
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-user"></i> <span id="userName">Пользователь</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#" onclick="showProfile()">Мой профиль</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="showFriends()">Друзья</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="showCommunities()">Сообщества</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="showMessages()">Сообщения</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#" onclick="logout()">Выйти</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Основной контент -->
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Боковая панель -->
+            <div class="col-md-3">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-user-circle"></i> Меню</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            <a href="#" class="list-group-item list-group-item-action active" onclick="showFeed()">
+                                <i class="fas fa-home"></i> Лента новостей
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action" onclick="showMyPosts()">
+                                <i class="fas fa-edit"></i> Мои посты
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action" onclick="showFriends()">
+                                <i class="fas fa-users"></i> Друзья
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action" onclick="showCommunities()">
+                                <i class="fas fa-building"></i> Сообщества
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action" onclick="showMessages()">
+                                <i class="fas fa-comments"></i> Сообщения
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Основной контент -->
+            <div class="col-md-6">
+                <!-- Создание поста -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-plus"></i> Создать пост</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="createPostForm">
+                            <div class="mb-3">
+                                <textarea class="form-control" id="postContent" rows="3" placeholder="Что у вас нового?"></textarea>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Опубликовать</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Лента постов -->
+                <div id="postsContainer">
+                    <!-- Посты будут загружаться здесь -->
+                </div>
+            </div>
+
+            <!-- Правая панель -->
+            <div class="col-md-3">
+                <!-- Быстрые действия -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-bolt"></i> Быстрые действия</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-outline-primary" onclick="showCreateCommunity()">
+                                <i class="fas fa-plus"></i> Создать сообщество
+                            </button>
+                            <button class="btn btn-outline-success" onclick="showSearchUsers()">
+                                <i class="fas fa-search"></i> Найти друзей
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Статистика -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-chart-bar"></i> Статистика</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center">
+                            <div class="col-4">
+                                <div class="h4 text-primary" id="postsCount">0</div>
+                                <small>Посты</small>
+                            </div>
+                            <div class="col-4">
+                                <div class="h4 text-success" id="friendsCount">0</div>
+                                <small>Друзья</small>
+                            </div>
+                            <div class="col-4">
+                                <div class="h4 text-info" id="communitiesCount">0</div>
+                                <small>Сообщества</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальные окна -->
+    <!-- Модальное окно для создания сообщества -->
+    <div class="modal fade" id="createCommunityModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Создать сообщество</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createCommunityForm">
+                        <div class="mb-3">
+                            <label for="communityName" class="form-label">Название</label>
+                            <input type="text" class="form-control" id="communityName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="communityDescription" class="form-label">Описание</label>
+                            <textarea class="form-control" id="communityDescription" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary" onclick="createCommunity()">Создать</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Скрипты -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
+
+
